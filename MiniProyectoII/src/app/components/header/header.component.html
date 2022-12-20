@@ -1,4 +1,17 @@
 <mat-toolbar color="primary">
-    <span>{{ title }}</span>
+
+    <button mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>{{title}}</span>
+
+    <span class="spacer"></span>
+
+    <button mat-button [matMenuTriggerFor]="menu">Opciones</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Agregar Presupuesto</button>
+      <button mat-menu-item>Ver Listado General</button>
+    </mat-menu>
+    
+    <span class="spacer"></span>
 </mat-toolbar>
-  
