@@ -7,6 +7,5 @@ export const environment = {
     authDomain: 'miniproyecto2-4ce9e.firebaseapp.com',
     messagingSenderId: '168600347117',
   },
-    production: true,
-  };
-  
+      production: false,
+    };
