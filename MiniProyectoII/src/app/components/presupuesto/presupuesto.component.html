@@ -1,0 +1,19 @@
+<form [formGroup]="formularioPresupuesto" (ngSubmit)="agregarPresupuesto">
+        <mat-form-field appearance="fill">
+            <mat-label>Presupuesto</mat-label>
+            <input matInput type="number" class="example-right-align" placeholder="0" formControlName="presupuesto">
+            <mat-error *ngIf="!formularioPresupuesto.get('presupuesto')?.valid">{{getErrorMessage()}}</mat-error>
+            <!-- <span matTextPrefix>$&nbsp;</span> -->
+            <!-- <span matTextSuffix>.00</span> -->
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>divisa </mat-label>
+            <input matInput type="text" formControlName="divisa">
+            <!-- <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button> -->
+        </mat-form-field>
+        <br>
+        <button mat-raised-button color="primary" type="submit">Guardar</button>
+</form>
