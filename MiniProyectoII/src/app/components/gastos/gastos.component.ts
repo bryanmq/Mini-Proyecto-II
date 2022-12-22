@@ -25,6 +25,7 @@ export class GastosComponent implements OnInit {
   gastoDTO!: IGasto;
   uuid = require('uuid');
   id!: string;
+  displayedColumns: string[] = ['nombre', 'categoria', 'monto', 'acciones'];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -59,7 +60,8 @@ export class GastosComponent implements OnInit {
       categoria: this.formularioGastos.value.categoria,
       monto: this.formularioGastos.value.monto,
     });
-
+    this.arrayGastos = [];
+    this.arrayGastos = this.gastos!.listagastos;
     debugger;
   }
 

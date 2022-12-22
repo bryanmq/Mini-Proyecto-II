@@ -1,5 +1,5 @@
-<mat-grid-list cols="4">
-  <mat-grid-tile colspan="4">
+<mat-grid-list cols="12">
+  <mat-grid-tile colspan="12">
     <mat-card>
       <mat-card-content>
         <h2>Ingresar Gastos</h2>
@@ -47,6 +47,46 @@
             </div>
           </form>
         </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+
+  <mat-grid-tile colspan="12">
+    <mat-card>
+      <mat-card-content>
+        <table mat-table [dataSource]="arrayGastos">
+          <ng-container matColumnDef="nombre">
+            <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+            <mat-cell *matCellDef="let contact">
+              {{ contact.nombre | titlecase }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="categoria">
+            <mat-header-cell *matHeaderCellDef>Categoría</mat-header-cell>
+            <mat-cell *matCellDef="let contact">
+              {{ contact.categoria | titlecase }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="monto">
+            <mat-header-cell *matHeaderCellDef>Monto</mat-header-cell>
+            <mat-cell *matCellDef="let contact">
+              {{ contact.monto | lowercase }}
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="acciones">
+            <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+            <mat-cell *matCellDef="let contact">
+              <button mat-flat-button color="accent">Edit</button>
+              &nbsp;
+              <button mat-flat-button color="warn">Delete</button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </table>
       </mat-card-content>
     </mat-card>
   </mat-grid-tile>
