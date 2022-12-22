@@ -3,11 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PresupuestoService } from '../../services/presupuesto/presupuesto.service';
 import { Router } from '@angular/router';
 import { DivisaService } from 'src/app/services/divisa/divisa.service';
+
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { IPresupuesto } from 'src/app/interfaces/ipresupuesto';
 
 @Component({
   selector: 'app-presupuesto',
@@ -15,10 +17,12 @@ import {
   styleUrls: ['./presupuesto.component.css'],
 })
 export class PresupuestoComponent implements OnInit {
+  presupuesto!: IPresupuesto;
   formularioPresupuesto!: FormGroup;
   divisas!: any[] | undefined;
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
+  uuid = require('uuid');
 
   constructor(
     private presupuestoService: PresupuestoService,
@@ -45,13 +49,23 @@ export class PresupuestoComponent implements OnInit {
   }
 
   agregarPresupuesto() {
+    let formulario = this.formularioPresupuesto.value;
+    this.presupuesto = {
+      id: this.uuid.v4(),
+      presupuesto: formulario.presupuesto,
+      divisa: formulario.divisa,
+      totalgasto: 0,
+      balance: 0,
+      listagastos: [],
+    };
+
     if (!this.formularioPresupuesto.invalid) {
       this.presupuestoService
-        .agregarPresupuesto(this.formularioPresupuesto.value)
+        .agregarPresupuesto(this.presupuesto)
         .then((result) => {
           console.log(`submitted: ${JSON.stringify(result)}`);
           this.openDialog();
-          this.router.navigate([`/gastos`]);
+          this.router.navigate([`/gastos/` + this.presupuesto.id]);
         })
         .catch((error) => console.error(error));
     }
@@ -73,5 +87,9 @@ export class PresupuestoComponent implements OnInit {
     return presupuesto?.hasError('min')
       ? `El valor minimo de este campo es ${presupuesto?.errors?.['min'].min}`
       : '';
+  }
+
+  obtenerPresupuesto(id: string) {
+    return this.presupuestoService.obtenerPresupuesto(id).then(() => {});
   }
 }

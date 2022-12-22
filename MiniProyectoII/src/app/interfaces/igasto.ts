@@ -5,12 +5,12 @@ export interface IGasto {
   monto: number;
 }
 
-export interface IGastoPrincipal {
-  id?: string;
-  nombregasto?: string;
-  presupuesto: number;
-  totalgasto: number;
-  balance: number;
-  divisa?: string;
-  listagastos?: IGasto[];
-}
+// export interface IGastoPrincipal {
+//   id?: string;
+//   nombregasto?: string;
+//   presupuesto: number;
+//   totalgasto: number;
+//   balance: number;
+//   divisa?: string;
+//   listagastos?: IGasto[];
+// }

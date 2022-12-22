@@ -16,19 +16,26 @@ import { Observable } from 'rxjs';
 import { IPresupuesto } from '../../interfaces/ipresupuesto';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PresupuestoService {
-  private collectionName = 'presupuesto'
-  constructor(private fireStore : Firestore) { }
+  private collectionName = 'presupuesto';
+  constructor(private fireStore: Firestore) {}
 
-  agregarPresupuesto(presupuesto : IPresupuesto){
+  agregarPresupuesto(presupuesto: IPresupuesto) {
     const presupuestoRef = collection(this.fireStore, this.collectionName);
     return addDoc(presupuestoRef, presupuesto);
   }
 
-  obtenerPresupuestos(){
+  obtenerPresupuestos() {
     const presupuestoRef = collection(this.fireStore, this.collectionName);
-    return collectionData(presupuestoRef, { idField : 'id'}) as Observable<IPresupuesto[]>;
+    return collectionData(presupuestoRef, { idField: 'id' }) as Observable<
+      IPresupuesto[]
+    >;
+  }
+
+  obtenerPresupuesto(id: string) {
+    const docRef = doc(this.fireStore, 'presupuesto', id);
+    return getDoc(docRef);
   }
 }

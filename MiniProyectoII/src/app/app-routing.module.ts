@@ -5,12 +5,11 @@ import { PresupuestoComponent } from './components/presupuesto/presupuesto.compo
 
 const routes: Routes = [
   { path: '', component: PresupuestoComponent },
-  { path: 'gastos', component: GastosPrincipalComponent},
-
+  { path: 'gastos/:id', component: GastosPrincipalComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { enableTracing: true })],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

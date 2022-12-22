@@ -5,9 +5,11 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
-import { IGasto, IGastoPrincipal } from 'src/app/interfaces/igasto';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IGasto } from 'src/app/interfaces/igasto';
+import { IPresupuesto } from 'src/app/interfaces/ipresupuesto';
 import { CategoriaService } from 'src/app/services/categoria/categoria.service';
+import { PresupuestoService } from 'src/app/services/presupuesto/presupuesto.service';
 
 @Component({
   selector: 'app-gastos',
@@ -15,28 +17,29 @@ import { CategoriaService } from 'src/app/services/categoria/categoria.service';
   styleUrls: ['./gastos.component.css'],
 })
 export class GastosComponent implements OnInit {
-  @Input() gastos: IGastoPrincipal;
-  gastoPrincipalDTO!: IGastoPrincipal | undefined;
+  @Input() gastos!: any;
   arrayGastos!: IGasto[];
   formularioGastos!: FormGroup;
   categorias!: any[] | undefined;
   gastoDTO!: IGasto;
+  uuid = require('uuid');
+  idpresupuesto: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private categoriaService: CategoriaService,
-    private roter: Router
+    private roter: Router,
+    private activeRoute: ActivatedRoute,
+    private presupuestoService: PresupuestoService
   ) {
     this.arrayGastos = [];
-    this.gastos = {
-      id: '',
-      nombregasto: '',
-      presupuesto: 0,
-      totalgasto: 0,
-      balance: 0,
-      divisa: '',
-      listagastos: [],
-    };
+    this.idpresupuesto = this.activeRoute.snapshot.paramMap.get('id');
+    let temp = this.presupuestoService
+      .obtenerPresupuesto(this.idpresupuesto)
+      .then((result) => {
+        this.gastos = { ...result.data() };
+        debugger;
+      });
   }
 
   ngOnInit(): void {
@@ -60,5 +63,7 @@ export class GastosComponent implements OnInit {
       categoria: this.formularioGastos.value.categoria,
       monto: this.formularioGastos.value.monto,
     });
+
+    debugger;
   }
 }
