@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import {
   Firestore,
   addDoc,
@@ -17,13 +16,12 @@ import {
 @Injectable({
   providedIn: 'root'
 })
-export class DivisaService {
+export class CategoriaService {
 
   constructor(private firestore: Firestore) { }
 
-  getDivisas(){
-    const lista = collection(this.firestore, 'divisas');
-    debugger;
+  getCategorias(){
+    const lista = collection(this.firestore, 'categorias');
     return collectionData(lista, {idField: 'id'})
   }
 }

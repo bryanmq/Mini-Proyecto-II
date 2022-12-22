@@ -13,27 +13,27 @@ import {
   where,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { IRubro } from 'src/app/interfaces/irubro';
+import { IGasto } from 'src/app/interfaces/igasto';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RubroService {
+export class GastoService {
   private collectionName = 'rubro'
   constructor(private fireStore : Firestore) { }
 
-  agregarRubro(rubro : IRubro){
+  agregarRubro(rubro : IGasto){
     const rubroRef = collection(this.fireStore, this.collectionName);
     return addDoc(rubroRef, rubro);
   }
 
-  actualizarRubro(rubro : IRubro){
+  actualizarRubro(rubro : IGasto){
     const rubroRef = doc(this.fireStore, `${this.collectionName}/${rubro.id}`);
     return setDoc(rubroRef, { ...rubro });
   }
 
   obtenerRubros(){
     const rubroRef = collection(this.fireStore, this.collectionName);
-    return collectionData(rubroRef, { idField : 'id'}) as Observable<IRubro[]>;
+    return collectionData(rubroRef, { idField : 'id'}) as Observable<IGasto[]>;
   }
 }

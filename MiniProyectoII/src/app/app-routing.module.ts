@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { GastosComponent } from './components/gastos/gastos.component';
+import { GastosPrincipalComponent } from './components/gastos-principal/gastos-principal.component';
 import { PresupuestoComponent } from './components/presupuesto/presupuesto.component';
 
 const routes: Routes = [
   { path: '', component: PresupuestoComponent },
-  { path: 'gastos', component: GastosComponent },
+  { path: 'gastos', component: GastosPrincipalComponent},
 
 ];
 

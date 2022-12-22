@@ -1,43 +1,47 @@
-
-    <div class="">
-        <h1 mat-h1 class="text-center">Ingresar Presupuesto:</h1>
+<mat-grid-list cols="4">
+    <mat-grid-tile colspan="4">
         <mat-card>
             <mat-card-content >
-                <form [formGroup]="formularioPresupuesto" 
+                <h2>Nuevo Presupuesto</h2>
+                <hr/>
+                <div class="example-container">
+                    <form [formGroup]="formularioPresupuesto" 
                         (ngSubmit)="agregarPresupuesto" 
-                        class="form-container"
-                        [ngStyle]="{ 'margin-left': '30%' }"
-                        >
-                    <mat-form-field class="wide-input">
-                        <mat-label>Monto del Presupuesto:</mat-label>
-                        <input  matInput 
-                                type="number" 
-                                class="wide-input" 
-                                placeholder="0" 
-                                formControlName="presupuesto"
-                                required>
-                        <mat-error *ngIf="!formularioPresupuesto.get('presupuesto')?.valid">{{getErrorMessage()}}</mat-error>
-                    </mat-form-field>
-            
-                    <mat-form-field appearance="fill">
-                        <mat-label>Divisa </mat-label>
-                        <input matInput type="text" formControlName="divisa">
-                    </mat-form-field>
-                    <button
-                        #submitButton
-                        matInput
-                        mat-flat-button
-                        [ngStyle]="{
-                        'margin-top': '-18px',
-                        'margin-left': '10px',
-                        padding: '28px'
-                        }"
-                        color="accent"
-                        type="submit"
-                        (click)=" agregarPresupuesto()"
-                        >+ Agregar</button>
-                </form>
+                        class="form-container">
+                        <mat-form-field >
+                            <mat-label>Presupuesto:</mat-label>
+                            <input  matInput 
+                                    type="number" 
+                                    class="wide-input" 
+                                    placeholder="0" 
+                                    formControlName="presupuesto"
+                                    required>
+                            <mat-error *ngIf="!formularioPresupuesto.get('presupuesto')?.valid">{{getErrorMessage()}}</mat-error>
+                        </mat-form-field>
+    
+                        &nbsp;
+                        <mat-form-field appearance="fill">
+                            <mat-label>Divisa </mat-label>
+                            <mat-select formControlName="divisa" 
+                                        placeholder="Seleccione una divisa">
+                                <mat-option>-- No Aplica --</mat-option>
+                                <mat-option *ngFor="let i of divisas" 
+                                            value="{{i.nombre}}"
+                                            >{{i.nombre}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        
+                        &nbsp;
+                        <button mat-fab color="primary" 
+                                #submitButton
+                                type="submit"
+                                (click)=" agregarPresupuesto()">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </form>
+                </div>
             </mat-card-content>
         </mat-card>
-    </div>
-
+    </mat-grid-tile>
+</mat-grid-list>

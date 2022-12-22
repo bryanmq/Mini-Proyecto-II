@@ -1,0 +1,55 @@
+
+<mat-grid-list cols="4">
+    <mat-grid-tile colspan="4">
+     
+        <mat-card>
+     
+            <mat-card-content >     
+              <h2>Ingresar Gastos</h2>
+              <hr/>
+                <div class="example-container">
+                    <form >
+                      <div class="main-gastos">
+                        <mat-form-field appearance="fill" >
+                            <mat-label>Nombre</mat-label>
+                            <input matInput placeholder="Nombre del gasto">
+                        </mat-form-field>
+                        &nbsp;
+                        <mat-form-field appearance="fill">
+                          <mat-label>Categoría</mat-label>
+                          <mat-select required formControlName="divisa" placeholder="Seleccione divisa">
+                              <mat-option *ngFor="let i of categorias" 
+                                          value="{{i.nombre}}"
+                                          >{{i.nombre}}
+                              </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        &nbsp; 
+                        <mat-form-field appearance="fill" >
+                            <mat-label>Monto:</mat-label>
+                            <input matInput 
+                                    placeholder="Ingrese Monto"
+                                    type="number" >
+                        </mat-form-field>
+                          &nbsp;
+                      </div>
+                      <br>
+                      <button
+                        #submitButton
+                        matInput
+                        mat-flat-button
+                        [ngStyle]="{
+                          'margin-top': '-30px',
+                          'margin-left': '250px',
+                          padding: '28px'
+                        }"
+                        color="accent"
+                        type="submit"
+                        (onclick)="ingresarGasto()">+ Ingresar Gasto</button>
+
+                    </form>
+                  </div>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>

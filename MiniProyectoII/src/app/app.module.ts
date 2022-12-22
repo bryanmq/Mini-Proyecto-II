@@ -14,6 +14,9 @@ import { PresupuestoComponent } from './components/presupuesto/presupuesto.compo
 import { AppRoutingModule } from './app-routing.module';
 import { GastosComponent } from './components/gastos/gastos.component';
 import {  Routes } from '@angular/router';
+import { DetalleGastoComponent } from './components/detalle-gasto/detalle-gasto.component';
+import { GastosPrincipalComponent } from './components/gastos-principal/gastos-principal.component';
+import { GastosListaComponent } from './components/gastos-lista/gastos-lista.component';
 
 const routes: Routes = [
   { path: '', component: PresupuestoComponent },
@@ -27,7 +30,10 @@ const routes: Routes = [
     HeaderComponent,
     FooterComponent,
     PresupuestoComponent,
-    GastosComponent
+    GastosComponent,
+    DetalleGastoComponent,
+    GastosPrincipalComponent,
+    GastosListaComponent
   ],
   imports: [
     BrowserModule,

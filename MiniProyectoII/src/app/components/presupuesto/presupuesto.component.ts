@@ -16,7 +16,6 @@ export class PresupuestoComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
-
   constructor(
     private presupuestoService : PresupuestoService, 
     private divisaService: DivisaService,
@@ -42,22 +41,22 @@ export class PresupuestoComponent implements OnInit {
   }
 
   agregarPresupuesto(){
-    this.presupuestoService
-    .agregarPresupuesto(this.formularioPresupuesto.value)
-    .then((result) => {
-      console.log(`submitted: ${JSON.stringify(result)}`);
-      this.openDialog();
-      this.router.navigate([`/gastos`]);
-    })
-    .catch((error) => console.error(error));
+    if(!this.formularioPresupuesto.invalid){
+      this.presupuestoService
+      .agregarPresupuesto(this.formularioPresupuesto.value)
+      .then((result) => {
+        console.log(`submitted: ${JSON.stringify(result)}`);
+        this.openDialog();
+        this.router.navigate([`/gastos`]);
+      })
+      .catch((error) => console.error(error));
+    }
   }
 
   obtenerDivisas(){
     const divisas= this.divisaService.getDivisas().subscribe((result)=>{
       this.divisas = result;
     });
-    debugger
-    console.log(divisas);
   }
 
   getErrorMessage() {
