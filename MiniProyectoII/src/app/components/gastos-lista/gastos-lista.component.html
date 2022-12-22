@@ -1,57 +1,38 @@
 <mat-grid-list cols="4">
-    <mat-grid-tile colspan="4">
-        <mat-card>
-            <mat-card-content >
-                <div class="example-container">
-                    <table mat-table >
-         
-                        <ng-container matColumnDef="nombre">
-                          <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
-                          <mat-cell *matCellDef="">
-                        
-                          </mat-cell>
-                        </ng-container>
-                    
-         
-                        <ng-container matColumnDef="categoria">
-                          <mat-header-cell *matHeaderCellDef>Categoria</mat-header-cell>
-                          <mat-cell *matCellDef="">
-                          
-                          </mat-cell>
-                        </ng-container>
-                    
-                    
-                        <ng-container matColumnDef="monto">
-                          <mat-header-cell *matHeaderCellDef>Monto</mat-header-cell>
-                          <mat-cell *matCellDef="">
-                          
-                          </mat-cell>
-                        </ng-container>
-                    
-       
-                        <ng-container matColumnDef="acciones">
-                          <mat-header-cell *matHeaderCellDef>Accciones</mat-header-cell>
-                          <mat-cell *matCellDef="">
-                            <button
-                              mat-flat-button
-                              color="accent"
-                              >
-                              Editar
-                            </button>
-                            &nbsp;
-                            <button mat-flat-button color="warn" >
-                              Eliminar
-                            </button>
-                          </mat-cell>
-                        </ng-container>
-                    
-                        <mat-header-row *matHeaderRowDef=""></mat-header-row>
-                        <mat-row *matRowDef="let row; columns: "></mat-row>
-                      </table>
-                  </div>
-            </mat-card-content>
-        </mat-card>
-    </mat-grid-tile>
-</mat-grid-list>
+  <mat-grid-tile colspan="4">
+    <mat-card>
+      <mat-card-content>
+        <div class="example-container">
+          <table mat-table>
+            <ng-container matColumnDef="nombre">
+              <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+              <mat-cell *matCellDef=""> </mat-cell>
+            </ng-container>
 
- 
+            <ng-container matColumnDef="categoria">
+              <mat-header-cell *matHeaderCellDef>Categoria</mat-header-cell>
+              <mat-cell *matCellDef=""> </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="monto">
+              <mat-header-cell *matHeaderCellDef>Monto</mat-header-cell>
+              <mat-cell *matCellDef=""> </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="acciones">
+              <mat-header-cell *matHeaderCellDef>Accciones</mat-header-cell>
+              <mat-cell *matCellDef="">
+                <button mat-flat-button color="accent">Editar</button>
+                &nbsp;
+                <button mat-flat-button color="warn">Eliminar</button>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef=""></mat-header-row>
+            <mat-row *matRowDef="let row; columns"></mat-row>
+          </table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
