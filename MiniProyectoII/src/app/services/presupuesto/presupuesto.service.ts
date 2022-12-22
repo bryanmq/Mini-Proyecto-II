@@ -27,7 +27,7 @@ export class PresupuestoService {
     return addDoc(presupuestoRef, presupuesto);
   }
 
-  obtenerPresupuestos() {
+  obtenerPresupuestos() : Observable<IPresupuesto[]> {
     const presupuestoRef = collection(this.fireStore, this.collectionName);
     return collectionData(presupuestoRef, { idField: 'id' }) as Observable<
       IPresupuesto[]

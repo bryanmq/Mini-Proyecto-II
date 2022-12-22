@@ -23,7 +23,6 @@ export class GastosComponent implements OnInit {
   formularioGastos!: FormGroup;
   categorias!: any[] | undefined;
   gastoDTO!: IGasto;
-  uuid = require('uuid');
   id!: string;
 
   constructor(
@@ -59,15 +58,13 @@ export class GastosComponent implements OnInit {
       categoria: this.formularioGastos.value.categoria,
       monto: this.formularioGastos.value.monto,
     });
-
-    debugger;
   }
 
-  obtenerPresupuesto() {
+  obtenerPresupuesto() {    
     this.presupuestoService.obtenerPresupuesto(this.id).then((docSnap) => {
       this.gastos = { id: this.id, ...docSnap.data() };
+      console.log(this.gastos);
       this.setForm();
-      debugger;
     });
   }
 
