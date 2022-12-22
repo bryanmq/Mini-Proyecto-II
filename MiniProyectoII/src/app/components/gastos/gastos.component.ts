@@ -33,13 +33,6 @@ export class GastosComponent implements OnInit {
     private presupuestoService: PresupuestoService
   ) {
     this.arrayGastos = [];
-    this.idpresupuesto = this.activeRoute.snapshot.paramMap.get('id');
-    let temp = this.presupuestoService
-      .obtenerPresupuesto(this.idpresupuesto)
-      .then((result) => {
-        this.gastos = { ...result.data() };
-        debugger;
-      });
   }
 
   ngOnInit(): void {
@@ -49,6 +42,8 @@ export class GastosComponent implements OnInit {
       monto: ['', Validators.required],
     });
     this.obtenerCategorias();
+    this.idpresupuesto = this.activeRoute.snapshot.paramMap.get('id') || '';
+    this.obtenerPresupuesto();
   }
 
   obtenerCategorias() {
@@ -65,5 +60,21 @@ export class GastosComponent implements OnInit {
     });
 
     debugger;
+  }
+
+  obtenerPresupuesto() {
+    this.presupuestoService
+      .obtenerPresupuesto(this.idpresupuesto)
+      .then((result) => {
+        this.gastos = { ...result.data() };
+        this.setForm();
+        debugger;
+      });
+  }
+
+  setForm() {
+    const values = {
+      nombre: this.gastos.presupuesto,
+    };
   }
 }
