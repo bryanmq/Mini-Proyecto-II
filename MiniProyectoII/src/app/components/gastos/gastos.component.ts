@@ -24,6 +24,7 @@ export class GastosComponent implements OnInit {
   categorias!: any[] | undefined;
   gastoDTO!: IGasto;
   id!: string;
+  displayedColumns: string[] = ['nombre', 'categoria', 'monto', 'acciones'];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -53,11 +54,19 @@ export class GastosComponent implements OnInit {
   }
 
   agregarGasto() {
+    debugger;
     this.gastos!.listagastos?.push({
       nombre: this.formularioGastos.value.nombre,
       categoria: this.formularioGastos.value.categoria,
       monto: this.formularioGastos.value.monto,
     });
+    // this.arrayGastos.push({
+    //   nombre: this.formularioGastos.value.nombre,
+    //   categoria: this.formularioGastos.value.categoria,
+    //   monto: this.formularioGastos.value.monto,
+    // });
+    this.arrayGastos = [];
+    this.arrayGastos = this.gastos.listagastos;
   }
 
   obtenerPresupuesto() {    
