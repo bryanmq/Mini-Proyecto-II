@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PresupuestoService } from '../../services/presupuesto/presupuesto.service';
+import { Router } from '@angular/router';
+import { DivisaService } from 'src/app/services/divisa/divisa.service';
 
 @Component({
   selector: 'app-presupuesto',
@@ -9,19 +11,39 @@ import { PresupuestoService } from '../../services/presupuesto/presupuesto.servi
 })
 export class PresupuestoComponent implements OnInit {
   formularioPresupuesto! : FormGroup;
-  /**
-   *
-   */
-  constructor(private presupuestoService : PresupuestoService, private fb : FormBuilder) { }
+  divisas!: any[] | undefined;
+
+  constructor(
+    private presupuestoService : PresupuestoService, 
+    private divisaService: DivisaService,
+    private fb : FormBuilder,
+    private router: Router,
+  ) { }
+
   ngOnInit(): void {
+    this.obtenerDivisas();
     this.formularioPresupuesto = this.fb.group({
       presupuesto: ['', [Validators.required, Validators.min(0)]],
-      divisa: [''],
+      divisa: this.divisas
     });
   }
 
   agregarPresupuesto(){
-    console.log(this.formularioPresupuesto.value);    
+    this.presupuestoService
+    .agregarPresupuesto(this.formularioPresupuesto.value)
+    .then((result) => {
+      console.log(`submitted: ${JSON.stringify(result)}`);
+      this.router.navigate([`/gastos`]);
+    })
+    .catch((error) => console.error(error));
+  }
+
+  obtenerDivisas(){
+    const divisas= this.divisaService.getDivisas().subscribe((result)=>{
+      this.divisas = result;
+    });
+    debugger
+    console.log(divisas);
   }
 
   getErrorMessage() {

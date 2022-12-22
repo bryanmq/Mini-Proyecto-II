@@ -12,16 +12,26 @@ import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { PresupuestoComponent } from './components/presupuesto/presupuesto.component';
 import { AppRoutingModule } from './app-routing.module';
+import { GastosComponent } from './components/gastos/gastos.component';
+import {  Routes } from '@angular/router';
+
+const routes: Routes = [
+  { path: '', component: PresupuestoComponent },
+  // { path: 'gastos', component: GastosComponent },
+
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    PresupuestoComponent
+    PresupuestoComponent,
+    GastosComponent
   ],
   imports: [
     BrowserModule,
+    // RouterModule.forRoot(routes, { enableTracing: true }),
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
