@@ -34,8 +34,8 @@ export class PresupuestoService {
     >;
   }
 
-  obtenerPresupuesto(id: string) {
-    const docRef = doc(this.fireStore, 'presupuesto', id);
+  obtenerPresupuesto(idpresupuesto: string) {
+    const docRef = doc(this.fireStore, this.collectionName, idpresupuesto);
     return getDoc(docRef);
   }
 }

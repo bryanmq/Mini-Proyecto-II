@@ -17,13 +17,14 @@ import { PresupuestoService } from 'src/app/services/presupuesto/presupuesto.ser
   styleUrls: ['./gastos.component.css'],
 })
 export class GastosComponent implements OnInit {
-  @Input() gastos!: any;
+  gastos: any = undefined;
+  idPresupuestoNuevo!: string;
   arrayGastos!: IGasto[];
   formularioGastos!: FormGroup;
   categorias!: any[] | undefined;
   gastoDTO!: IGasto;
   uuid = require('uuid');
-  idpresupuesto: any;
+  idpresupuesto!: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -65,8 +66,8 @@ export class GastosComponent implements OnInit {
   obtenerPresupuesto() {
     this.presupuestoService
       .obtenerPresupuesto(this.idpresupuesto)
-      .then((result) => {
-        this.gastos = { ...result.data() };
+      .then((docRef) => {
+        this.gastos = { id: this.idpresupuesto, ...docRef.data() };
         this.setForm();
         debugger;
       });
