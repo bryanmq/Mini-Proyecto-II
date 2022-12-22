@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PresupuestoService } from '../../services/presupuesto/presupuesto.service';
 import { Router } from '@angular/router';
 import { DivisaService } from 'src/app/services/divisa/divisa.service';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-presupuesto',
@@ -12,12 +13,16 @@ import { DivisaService } from 'src/app/services/divisa/divisa.service';
 export class PresupuestoComponent implements OnInit {
   formularioPresupuesto! : FormGroup;
   divisas!: any[] | undefined;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'right';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+
 
   constructor(
     private presupuestoService : PresupuestoService, 
     private divisaService: DivisaService,
     private fb : FormBuilder,
     private router: Router,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -28,11 +33,20 @@ export class PresupuestoComponent implements OnInit {
     });
   }
 
+  openDialog() {
+    this._snackBar.open('Presupuesto agregado exitosamente!', 'Aceptar', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      duration: 3000
+    });
+  }
+
   agregarPresupuesto(){
     this.presupuestoService
     .agregarPresupuesto(this.formularioPresupuesto.value)
     .then((result) => {
       console.log(`submitted: ${JSON.stringify(result)}`);
+      this.openDialog();
       this.router.navigate([`/gastos`]);
     })
     .catch((error) => console.error(error));
