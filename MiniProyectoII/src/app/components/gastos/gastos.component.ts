@@ -24,7 +24,7 @@ export class GastosComponent implements OnInit {
   categorias!: any[] | undefined;
   gastoDTO!: IGasto;
   uuid = require('uuid');
-  idpresupuesto!: string;
+  id!: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,7 +43,7 @@ export class GastosComponent implements OnInit {
       monto: ['', Validators.required],
     });
     this.obtenerCategorias();
-    this.idpresupuesto = this.activeRoute.snapshot.paramMap.get('id') || '';
+    this.id = this.activeRoute.snapshot.paramMap.get('id') || '';
     this.obtenerPresupuesto();
   }
 
@@ -64,13 +64,11 @@ export class GastosComponent implements OnInit {
   }
 
   obtenerPresupuesto() {
-    this.presupuestoService
-      .obtenerPresupuesto(this.idpresupuesto)
-      .then((docRef) => {
-        this.gastos = { id: this.idpresupuesto, ...docRef.data() };
-        this.setForm();
-        debugger;
-      });
+    this.presupuestoService.obtenerPresupuesto(this.id).then((docSnap) => {
+      this.gastos = { id: this.id, ...docSnap.data() };
+      this.setForm();
+      debugger;
+    });
   }
 
   setForm() {

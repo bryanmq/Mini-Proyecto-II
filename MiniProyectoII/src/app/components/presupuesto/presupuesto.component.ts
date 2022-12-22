@@ -65,7 +65,7 @@ export class PresupuestoComponent implements OnInit {
         .then((result) => {
           console.log(`submitted: ${JSON.stringify(result)}`);
           this.openDialog();
-          this.router.navigate([`/gastos/` + this.presupuesto.id]);
+          this.router.navigate([`/gastos/` + result.id]);
         })
         .catch((error) => console.error(error));
     }

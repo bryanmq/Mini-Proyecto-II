@@ -19,7 +19,7 @@ import { IPresupuesto } from '../../interfaces/ipresupuesto';
   providedIn: 'root',
 })
 export class PresupuestoService {
-  private collectionName = 'presupuesto';
+  private collectionName = 'presupuestos';
   constructor(private fireStore: Firestore) {}
 
   agregarPresupuesto(presupuesto: IPresupuesto) {
@@ -34,8 +34,8 @@ export class PresupuestoService {
     >;
   }
 
-  obtenerPresupuesto(idpresupuesto: string) {
-    const docRef = doc(this.fireStore, this.collectionName, idpresupuesto);
+  obtenerPresupuesto(id: string) {
+    const docRef = doc(this.fireStore, this.collectionName, id);
     return getDoc(docRef);
   }
 }
