@@ -83,4 +83,9 @@ export class GastosComponent implements OnInit {
       nombre: this.gastos.presupuesto,
     };
   }
+
+  editarGasto(gasto: IGasto) {
+    debugger;
+    this.roter.navigate([`/editar-gasto/${gasto.id}`]);
+  }
 }

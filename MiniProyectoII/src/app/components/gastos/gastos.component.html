@@ -78,7 +78,13 @@
           <ng-container matColumnDef="acciones">
             <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
             <mat-cell *matCellDef="let contact">
-              <button mat-flat-button color="accent">Edit</button>
+              <button
+                mat-flat-button
+                color="accent"
+                (click)="editarGasto(contact)"
+              >
+                Edit
+              </button>
               &nbsp;
               <button mat-flat-button color="warn">Delete</button>
             </mat-cell>
