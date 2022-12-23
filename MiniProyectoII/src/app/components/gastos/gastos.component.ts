@@ -1,15 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatTable } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IGasto } from 'src/app/interfaces/igasto';
 import { IPresupuesto } from 'src/app/interfaces/ipresupuesto';
 import { CategoriaService } from 'src/app/services/categoria/categoria.service';
 import { PresupuestoService } from 'src/app/services/presupuesto/presupuesto.service';
+import { DetalleGastoComponent } from '../detalle-gasto/detalle-gasto.component';
 
 @Component({
   selector: 'app-gastos',
@@ -17,15 +19,17 @@ import { PresupuestoService } from 'src/app/services/presupuesto/presupuesto.ser
   styleUrls: ['./gastos.component.css'],
 })
 export class GastosComponent implements OnInit {
-  gastos: any = undefined;
+  presupuesto: any = undefined;
   idPresupuestoNuevo!: string;
-  arrayGastos!: IGasto[];
+  arrayGastos: IGasto[] = [];
   formularioGastos!: FormGroup;
   categorias!: any[] | undefined;
   gastoDTO!: IGasto;
-  uuid = require('uuid');
   id!: string;
   displayedColumns: string[] = ['nombre', 'categoria', 'monto', 'acciones'];
+  @ViewChild(MatTable) table!: MatTable<IGasto>;
+  @ViewChild(DetalleGastoComponent)
+  detalleGastoComponent!: DetalleGastoComponent;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,9 +37,7 @@ export class GastosComponent implements OnInit {
     private roter: Router,
     private activeRoute: ActivatedRoute,
     private presupuestoService: PresupuestoService
-  ) {
-    this.arrayGastos = [];
-  }
+  ) {}
 
   ngOnInit(): void {
     this.formularioGastos = this.formBuilder.group({
@@ -55,33 +57,32 @@ export class GastosComponent implements OnInit {
   }
 
   agregarGasto() {
-    debugger;
-    this.gastos!.listagastos?.push({
-      nombre: this.formularioGastos.value.nombre,
-      categoria: this.formularioGastos.value.categoria,
-      monto: this.formularioGastos.value.monto,
-    });
-    // this.arrayGastos.push({
-    //   nombre: this.formularioGastos.value.nombre,
-    //   categoria: this.formularioGastos.value.categoria,
-    //   monto: this.formularioGastos.value.monto,
-    // });
-    this.arrayGastos = [];
-    this.arrayGastos = this.gastos.listagastos;
+    const rubro = {
+      ...this.formularioGastos.value,
+    };
+    this.presupuesto!.listagastos?.push(rubro);
+
+    this.arrayGastos.push(rubro);
+    this.table.renderRows();
+    this.detalleGastoComponent.calcularTotales(rubro);
+    this.formularioGastos.reset();
   }
 
   obtenerPresupuesto() {
     this.presupuestoService.obtenerPresupuesto(this.id).then((docSnap) => {
-      this.gastos = { id: this.id, ...docSnap.data() };
+      this.presupuesto = { id: this.id, ...docSnap.data() };
       this.setForm();
-      debugger;
     });
   }
 
   setForm() {
     const values = {
-      nombre: this.gastos.presupuesto,
+      nombre: this.presupuesto.presupuesto,
     };
+  }
+
+  console(msj: any) {
+    console.log(msj);
   }
 
   editarGasto(gasto: IGasto) {

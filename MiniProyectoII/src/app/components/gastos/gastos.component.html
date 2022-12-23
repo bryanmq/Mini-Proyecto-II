@@ -4,7 +4,7 @@
       <mat-card-content>
         <h2>Ingresar Gastos</h2>
         <hr />
-        <div class="example-container">
+        <div>
           <form [formGroup]="formularioGastos" (ngSubmit)="(agregarGasto)">
             <div class="main-gastos">
               <mat-form-field appearance="fill">
@@ -77,16 +77,14 @@
           </ng-container>
           <ng-container matColumnDef="acciones">
             <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
-            <mat-cell *matCellDef="let contact">
-              <button
-                mat-flat-button
-                color="accent"
-                (click)="editarGasto(contact)"
-              >
+            <mat-cell *matCellDef="let contact; let i = index">
+              <button mat-flat-button color="accent" (click)="console(i)">
                 Edit
               </button>
               &nbsp;
-              <button mat-flat-button color="warn">Delete</button>
+              <button mat-flat-button color="warn" (click)="console(i)">
+                Delete
+              </button>
             </mat-cell>
           </ng-container>
 
@@ -97,3 +95,4 @@
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>
+<app-detalle-gasto [presupuesto]="presupuesto.presupuesto"></app-detalle-gasto>

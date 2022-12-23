@@ -23,7 +23,6 @@ export class DivisaService {
 
   getDivisas(){
     const lista = collection(this.firestore, 'divisas');
-    debugger;
     return collectionData(lista, {idField: 'id'})
   }
 }

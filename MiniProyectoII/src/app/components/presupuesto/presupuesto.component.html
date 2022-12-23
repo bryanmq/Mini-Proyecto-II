@@ -4,11 +4,9 @@
       <mat-card-content>
         <h2>Nuevo Presupuesto</h2>
         <hr />
-        <div class="example-container">
+        <div>
           <form
             [formGroup]="formularioPresupuesto"
-            (ngSubmit)="(agregarPresupuesto)"
-            class="form-container"
           >
             <mat-form-field>
               <mat-label>Presupuesto:</mat-label>
@@ -25,9 +23,8 @@
                 >{{ getErrorMessage() }}</mat-error
               >
             </mat-form-field>
-
             &nbsp;
-            <mat-form-field appearance="fill">
+            <mat-form-field>
               <mat-label>Divisa </mat-label>
               <mat-select
                 formControlName="divisa"

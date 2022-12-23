@@ -40,8 +40,8 @@ export class PresupuestoComponent implements OnInit {
     });
   }
 
-  openDialog() {
-    this._snackBar.open('Presupuesto agregado exitosamente!', 'Aceptar', {
+  openDialog(message :string) {
+    this._snackBar.open(message, 'Aceptar', {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       duration: 3000,
@@ -64,10 +64,10 @@ export class PresupuestoComponent implements OnInit {
         .agregarPresupuesto(this.presupuesto)
         .then((result) => {
           console.log(`submitted: ${JSON.stringify(result)}`);
-          this.openDialog();
+          this.openDialog('Presupuesto agregado exitosamente!');
           this.router.navigate([`/gastos/` + result.id]);
         })
-        .catch((error) => console.error(error));
+        .catch((error) => this.openDialog(error));
     }
   }
 
