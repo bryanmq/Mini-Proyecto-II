@@ -95,4 +95,4 @@
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>
-<app-detalle-gasto [presupuesto]="presupuesto.presupuesto"></app-detalle-gasto>
+<app-detalle-gasto [presupuesto]="presupuesto.presupuesto || 0" (gastoPadre)="actualizarPresupuesto($event)"></app-detalle-gasto>

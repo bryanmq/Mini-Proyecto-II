@@ -38,4 +38,10 @@ export class PresupuestoService {
     const docRef = doc(this.fireStore, this.collectionName, id);
     return getDoc(docRef);
   }
+
+  actualizarPresupuesto(id: any ,presupuesto: IPresupuesto) {
+    console.log(presupuesto);
+    const presupuestoRef = doc(this.fireStore, `${this.collectionName}/${id}`);
+    return setDoc(presupuestoRef, presupuesto);
+  }
 }

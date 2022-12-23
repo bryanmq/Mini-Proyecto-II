@@ -5,6 +5,11 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IGasto } from 'src/app/interfaces/igasto';
@@ -19,7 +24,7 @@ import { DetalleGastoComponent } from '../detalle-gasto/detalle-gasto.component'
   styleUrls: ['./gastos.component.css'],
 })
 export class GastosComponent implements OnInit {
-  presupuesto: any = undefined;
+  presupuesto: IPresupuesto = { presupuesto: 0, totalgasto: 0, balance: 0 };
   idPresupuestoNuevo!: string;
   arrayGastos: IGasto[] = [];
   formularioGastos!: FormGroup;
@@ -30,11 +35,13 @@ export class GastosComponent implements OnInit {
   @ViewChild(MatTable) table!: MatTable<IGasto>;
   @ViewChild(DetalleGastoComponent)
   detalleGastoComponent!: DetalleGastoComponent;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   constructor(
     private formBuilder: FormBuilder,
     private categoriaService: CategoriaService,
-    private roter: Router,
+    private router: Router,
     private activeRoute: ActivatedRoute,
     private presupuestoService: PresupuestoService
   ) {}
@@ -70,9 +77,21 @@ export class GastosComponent implements OnInit {
 
   obtenerPresupuesto() {
     this.presupuestoService.obtenerPresupuesto(this.id).then((docSnap) => {
-      this.presupuesto = { id: this.id, ...docSnap.data() };
+      this.presupuesto = { id: this.id, ...(docSnap.data() as IPresupuesto) };
       this.setForm();
     });
+  }
+
+  actualizarPresupuesto({ gasto, balance }: any) {
+    this.presupuesto.totalgasto = gasto;
+    this.presupuesto.balance = balance;
+    this.presupuestoService
+      .actualizarPresupuesto(this.id, this.presupuesto)
+      .then(() => {
+        // this.openDialog('Presupuesto actualizado correctamente');
+        this.router.navigate([`/`]);
+      });
+    // .catch((ex) => this.openDialog(ex));
   }
 
   setForm() {
@@ -80,13 +99,20 @@ export class GastosComponent implements OnInit {
       nombre: this.presupuesto.presupuesto,
     };
   }
+  // openDialog(message: string) {
+  //   this._snackBar.open(message, 'Aceptar', {
+  //     horizontalPosition: this.horizontalPosition,
+  //     verticalPosition: this.verticalPosition,
+  //     duration: 3000,
+  //   });
+  // }
 
   console(msj: any) {
     console.log(msj);
   }
 
-  editarGasto(gasto: IGasto) {
-    debugger;
-    this.roter.navigate([`/editar-gasto/${gasto.id}`]);
-  }
+  // editarGasto(gasto: IGasto) {
+  //   debugger;
+  //   this.roter.navigate([`/editar-gasto/${gasto.id}`]);
+  // }
 }
