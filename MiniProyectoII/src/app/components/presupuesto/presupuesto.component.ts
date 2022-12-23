@@ -18,6 +18,7 @@ import { IPresupuesto } from 'src/app/interfaces/ipresupuesto';
 })
 export class PresupuestoComponent implements OnInit {
   presupuesto!: IPresupuesto;
+  presupuestos: IPresupuesto[] = [];
   formularioPresupuesto!: FormGroup;
   divisas!: any[] | undefined;
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
@@ -37,6 +38,9 @@ export class PresupuestoComponent implements OnInit {
     this.formularioPresupuesto = this.fb.group({
       presupuesto: ['', [Validators.required, Validators.min(0)]],
       divisa: this.divisas,
+    });
+    this.presupuestoService.obtenerPresupuestos().subscribe((presupuestos)=>{
+      this.presupuestos = presupuestos;
     });
   }
 
