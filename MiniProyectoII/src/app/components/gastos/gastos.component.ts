@@ -49,14 +49,14 @@ export class GastosComponent implements OnInit {
     public dialog: MatDialog
   ) {}
 
-  openDialog(gasto:IGasto): void {
+  openDialog(gasto: IGasto): void {
     const dialogRef = this.dialog.open(EditarGastoComponent, {
       data: gasto,
       height: '400px',
       width: '100%',
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log('Gasto editado!!!');
     });
   }
@@ -128,6 +128,20 @@ export class GastosComponent implements OnInit {
 
   console(msj: any) {
     console.log(msj);
+  }
+
+  eliminarGasto(gasto: IGasto) {
+    const index = this.arrayGastos.findIndex(
+      (x) =>
+        x.nombre === gasto.nombre &&
+        x.monto === gasto.monto &&
+        x.categoria === gasto.categoria
+    );
+    if (index > -1) {
+      this.arrayGastos.splice(index, 1);
+      this.table.renderRows();
+      this.formularioGastos.reset();
+    }
   }
 
   // editarGasto(gasto: IGasto) {

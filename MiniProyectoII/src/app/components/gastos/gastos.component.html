@@ -2,7 +2,7 @@
   <mat-grid-tile colspan="12">
     <mat-card>
       <mat-card-content>
-        <br>
+        <br />
         <h2>Ingresar Gastos</h2>
         <hr />
         <div>
@@ -79,11 +79,19 @@
           <ng-container matColumnDef="acciones">
             <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
             <mat-cell *matCellDef="let contact; let i = index">
-              <button mat-flat-button color="accent" (click)="openDialog(contact)">
+              <button
+                mat-flat-button
+                color="accent"
+                (click)="openDialog(contact)"
+              >
                 Editar
               </button>
               &nbsp;
-              <button mat-flat-button color="warn" (click)="console(i)">
+              <button
+                mat-flat-button
+                color="warn"
+                (click)="eliminarGasto(contact)"
+              >
                 Delete
               </button>
             </mat-cell>
@@ -96,4 +104,7 @@
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>
-<app-detalle-gasto [presupuesto]="presupuesto.presupuesto || 0" (gastoPadre)="actualizarPresupuesto($event)"></app-detalle-gasto>
+<app-detalle-gasto
+  [presupuesto]="presupuesto.presupuesto || 0"
+  (gastoPadre)="actualizarPresupuesto($event)"
+></app-detalle-gasto>
