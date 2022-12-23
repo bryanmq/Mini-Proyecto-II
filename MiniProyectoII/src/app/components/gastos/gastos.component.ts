@@ -75,6 +75,7 @@ export class GastosComponent implements OnInit {
   obtenerPresupuesto() {
     this.presupuestoService.obtenerPresupuesto(this.id).then((docSnap) => {
       this.presupuesto = { id: this.id, ...docSnap.data() as IPresupuesto };
+      this.arrayGastos = this.presupuesto.listagastos!;
       this.setForm();
     });
   }
