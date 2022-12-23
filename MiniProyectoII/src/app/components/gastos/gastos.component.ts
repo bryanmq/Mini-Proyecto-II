@@ -49,15 +49,17 @@ export class GastosComponent implements OnInit {
     public dialog: MatDialog
   ) {}
 
-  openDialog(gasto:IGasto): void {
+  openDialog(gasto:IGasto, indice : number): void {
     const dialogRef = this.dialog.open(EditarGastoComponent, {
       data: gasto,
-      height: '400px',
-      width: '100%',
+      height: '300px',
+      width: '60%',
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('Gasto editado!!!');
+      this.arrayGastos[indice] = result;
+      this.table.renderRows();
+      console.log('Gasto editado!!!', result);
     });
   }
 

@@ -25,11 +25,12 @@ export class EditarGastoComponent implements OnInit {
       categoria: ['', Validators.required],
       monto: ['', Validators.required],
     });
-    this.obtenerCategorias()
+    this.obtenerCategorias();
+    this.formularioGastosEdicion.patchValue(this.data);
   }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(this.formularioGastosEdicion.value);
   }
 
   obtenerCategorias() {

@@ -79,7 +79,7 @@
           <ng-container matColumnDef="acciones">
             <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
             <mat-cell *matCellDef="let contact; let i = index">
-              <button mat-flat-button color="accent" (click)="openDialog(contact)">
+              <button mat-flat-button color="accent" (click)="openDialog(contact, i)">
                 Editar
               </button>
               &nbsp;
