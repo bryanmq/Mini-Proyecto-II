@@ -1,1 +1,62 @@
-<h2>Editar Gasto</h2>
+<h1 mat-dialog-title>Editar gasto</h1>
+<div mat-dialog-content>
+    <mat-grid-list cols="12">
+        <mat-grid-tile colspan="12">
+          <mat-card>
+            <mat-card-content>
+              <br>
+              <h2>Ingresar Gastos</h2>
+              <hr />
+              <div>
+                <form [formGroup]="formularioGastosEdicion">
+                  <div class="main-gastos">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Nombre</mat-label>
+                      <input
+                        matInput
+                        placeholder="Nombre del gasto"
+                        formControlName="nombre"
+                      />
+                    </mat-form-field>
+                    &nbsp;
+                    <mat-form-field appearance="fill">
+                      <mat-label>Categoría</mat-label>
+                      <mat-select
+                        required
+                        formControlName="categoria"
+                        placeholder="Seleccione una categoría"
+                      >
+                        <mat-option
+                          *ngFor="let i of categorias"
+                          value="{{ i.nombre }}"
+                          >{{ i.nombre }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    &nbsp;
+                    <mat-form-field appearance="fill">
+                      <mat-label>Monto:</mat-label>
+                      <input
+                        matInput
+                        placeholder="Ingrese Monto"
+                        type="number"
+                        formControlName="monto"
+                      />
+                    </mat-form-field>
+                    &nbsp;
+                    <button mat-button color="primary">
+                      <mat-icon mat-icon>confirmar</mat-icon>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+</div>
+<div mat-dialog-actions align="center">
+  <button mat-button color="warn" (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data.nombre" cdkFocusInitial>Ok</button>
+</div>
+

@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
@@ -17,6 +18,7 @@ import { IPresupuesto } from 'src/app/interfaces/ipresupuesto';
 import { CategoriaService } from 'src/app/services/categoria/categoria.service';
 import { PresupuestoService } from 'src/app/services/presupuesto/presupuesto.service';
 import { DetalleGastoComponent } from '../detalle-gasto/detalle-gasto.component';
+import { EditarGastoComponent } from '../editar-gasto/editar-gasto.component';
 
 @Component({
   selector: 'app-gastos',
@@ -43,8 +45,21 @@ export class GastosComponent implements OnInit {
     private categoriaService: CategoriaService,
     private router: Router,
     private activeRoute: ActivatedRoute,
-    private presupuestoService: PresupuestoService
+    private presupuestoService: PresupuestoService,
+    public dialog: MatDialog
   ) {}
+
+  openDialog(gasto:IGasto): void {
+    const dialogRef = this.dialog.open(EditarGastoComponent, {
+      data: gasto,
+      height: '400px',
+      width: '100%',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Gasto editado!!!');
+    });
+  }
 
   ngOnInit(): void {
     this.formularioGastos = this.formBuilder.group({
@@ -69,7 +84,7 @@ export class GastosComponent implements OnInit {
     };
     this.presupuesto!.listagastos?.push(rubro);
 
-    this.arrayGastos.push(rubro);
+    // this.arrayGastos.push(rubro);
     this.table.renderRows();
     this.detalleGastoComponent.calcularTotales(rubro);
     this.formularioGastos.reset();
