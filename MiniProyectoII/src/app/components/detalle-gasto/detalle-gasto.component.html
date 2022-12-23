@@ -8,20 +8,20 @@
           <form>
             <div class="main-gastos">
               <mat-form-field appearance="fill">
-                <mat-label>Nombre</mat-label>
-                <input matInput placeholder="Nombre del gasto" />
+                <mat-label>Presupuesto</mat-label>
+                <input matInput placeholder="Nombre del gasto"  readonly [value]="presupuesto"/>
               </mat-form-field>
               &nbsp;
 
               <mat-form-field appearance="fill">
                 <mat-label>Total de Gastos</mat-label>
-                <input matInput placeholder="Nombre del gasto" />
+                <input matInput placeholder="Nombre del gasto" readonly [value]="gasto"/>
               </mat-form-field>
               &nbsp;
 
               <mat-form-field appearance="fill">
                 <mat-label>Balance</mat-label>
-                <input matInput placeholder="Nombre del gasto" />
+                <input matInput placeholder="Nombre del gasto" readonly [value]="balance"/>
               </mat-form-field>
               &nbsp;
             </div>

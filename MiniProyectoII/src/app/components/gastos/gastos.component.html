@@ -77,10 +77,10 @@
           </ng-container>
           <ng-container matColumnDef="acciones">
             <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
-            <mat-cell *matCellDef="let contact">
-              <button mat-flat-button color="accent">Edit</button>
+            <mat-cell *matCellDef="let contact; let i = index;">
+              <button mat-flat-button color="accent" (click)="console(i)">Edit</button>
               &nbsp;
-              <button mat-flat-button color="warn">Delete</button>
+              <button mat-flat-button color="warn" (click)="console(i)">Delete</button>
             </mat-cell>
           </ng-container>
 
@@ -91,3 +91,4 @@
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>
+<app-detalle-gasto [presupuesto]="presupuesto.presupuesto"></app-detalle-gasto>
