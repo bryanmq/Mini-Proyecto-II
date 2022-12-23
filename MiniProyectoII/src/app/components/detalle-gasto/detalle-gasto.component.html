@@ -3,6 +3,7 @@
     <mat-card>
       <mat-card-content>
         <h2>Detalle de Gastos</h2>
+        <button mat-flat-button color="primary" (click)="gastoPadre.emit({gasto, balance})">Guardar Presupuesto</button>
         <hr />
         <div class="example-container">
           <form>
@@ -31,5 +32,5 @@
       </mat-card-content>
     </mat-card>
   </mat-grid-tile>
-  <mat-grid-tile colspan="4">2</mat-grid-tile>
+  <!-- <mat-grid-tile colspan="4">2</mat-grid-tile> -->
 </mat-grid-list>
