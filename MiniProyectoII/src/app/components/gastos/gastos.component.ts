@@ -5,7 +5,11 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IGasto } from 'src/app/interfaces/igasto';
@@ -20,7 +24,7 @@ import { DetalleGastoComponent } from '../detalle-gasto/detalle-gasto.component'
   styleUrls: ['./gastos.component.css'],
 })
 export class GastosComponent implements OnInit {
-  presupuesto: IPresupuesto = {presupuesto:0,totalgasto: 0, balance:0};
+  presupuesto: IPresupuesto = { presupuesto: 0, totalgasto: 0, balance: 0 };
   idPresupuestoNuevo!: string;
   arrayGastos: IGasto[] = [];
   formularioGastos!: FormGroup;
@@ -29,7 +33,8 @@ export class GastosComponent implements OnInit {
   id!: string;
   displayedColumns: string[] = ['nombre', 'categoria', 'monto', 'acciones'];
   @ViewChild(MatTable) table!: MatTable<IGasto>;
-  @ViewChild(DetalleGastoComponent) detalleGastoComponent!: DetalleGastoComponent;
+  @ViewChild(DetalleGastoComponent)
+  detalleGastoComponent!: DetalleGastoComponent;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
@@ -38,10 +43,8 @@ export class GastosComponent implements OnInit {
     private categoriaService: CategoriaService,
     private router: Router,
     private activeRoute: ActivatedRoute,
-    private presupuestoService: PresupuestoService,
-    private _snackBar: MatSnackBar
-  ) {
-  }
+    private presupuestoService: PresupuestoService
+  ) {}
 
   ngOnInit(): void {
     this.formularioGastos = this.formBuilder.group({
@@ -62,8 +65,8 @@ export class GastosComponent implements OnInit {
 
   agregarGasto() {
     const rubro = {
-      ...this.formularioGastos.value
-    }
+      ...this.formularioGastos.value,
+    };
     this.presupuesto!.listagastos?.push(rubro);
 
     this.arrayGastos.push(rubro);
@@ -74,9 +77,9 @@ export class GastosComponent implements OnInit {
 
   obtenerPresupuesto() {
     this.presupuestoService.obtenerPresupuesto(this.id).then((docSnap) => {
-      this.presupuesto = { id: this.id, ...docSnap.data() as IPresupuesto };
+      this.presupuesto = { id: this.id, ...(docSnap.data() as IPresupuesto) };
       this.arrayGastos = this.presupuesto.listagastos!;
-      this.presupuesto.listagastos!.forEach(rubro => {
+      this.presupuesto.listagastos!.forEach((rubro) => {
         this.detalleGastoComponent.calcularTotales(rubro);
       });
       this.setForm();
@@ -86,12 +89,13 @@ export class GastosComponent implements OnInit {
   actualizarPresupuesto({ gasto, balance }: any) {
     this.presupuesto.totalgasto = gasto;
     this.presupuesto.balance = balance;
-    this.presupuestoService.actualizarPresupuesto(this.id,this.presupuesto)
+    this.presupuestoService
+      .actualizarPresupuesto(this.id, this.presupuesto)
       .then(() => {
-        this.openDialog('Presupuesto actualizado correctamente')
+        // this.openDialog('Presupuesto actualizado correctamente');
         this.router.navigate([`/`]);
-      })
-      .catch((ex) => this.openDialog(ex));
+      });
+    // .catch((ex) => this.openDialog(ex));
   }
 
   setForm() {
@@ -99,15 +103,20 @@ export class GastosComponent implements OnInit {
       nombre: this.presupuesto.presupuesto,
     };
   }
-  openDialog(message: string) {
-    this._snackBar.open(message, 'Aceptar', {
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-      duration: 3000,
-    });
-  }
+  // openDialog(message: string) {
+  //   this._snackBar.open(message, 'Aceptar', {
+  //     horizontalPosition: this.horizontalPosition,
+  //     verticalPosition: this.verticalPosition,
+  //     duration: 3000,
+  //   });
+  // }
 
   console(msj: any) {
     console.log(msj);
   }
+
+  // editarGasto(gasto: IGasto) {
+  //   debugger;
+  //   this.roter.navigate([`/editar-gasto/${gasto.id}`]);
+  // }
 }

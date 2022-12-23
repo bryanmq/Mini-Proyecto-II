@@ -77,10 +77,14 @@
           </ng-container>
           <ng-container matColumnDef="acciones">
             <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
-            <mat-cell *matCellDef="let contact; let i = index;">
-              <button mat-flat-button color="accent" (click)="console(i)">Edit</button>
+            <mat-cell *matCellDef="let contact; let i = index">
+              <button mat-flat-button color="accent" (click)="console(i)">
+                Edit
+              </button>
               &nbsp;
-              <button mat-flat-button color="warn" (click)="console(i)">Delete</button>
+              <button mat-flat-button color="warn" (click)="console(i)">
+                Delete
+              </button>
             </mat-cell>
           </ng-container>
 

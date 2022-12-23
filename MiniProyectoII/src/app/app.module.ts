@@ -17,6 +17,7 @@ import {  Routes } from '@angular/router';
 import { DetalleGastoComponent } from './components/detalle-gasto/detalle-gasto.component';
 import { GastosPrincipalComponent } from './components/gastos-principal/gastos-principal.component';
 import { GastosListaComponent } from './components/gastos-lista/gastos-lista.component';
+import { EditarGastoComponent } from './components/editar-gasto/editar-gasto.component';
 
 const routes: Routes = [
   { path: '', component: PresupuestoComponent },
@@ -33,7 +34,8 @@ const routes: Routes = [
     GastosComponent,
     DetalleGastoComponent,
     GastosPrincipalComponent,
-    GastosListaComponent
+    GastosListaComponent,
+    EditarGastoComponent
   ],
   imports: [
     BrowserModule,
