@@ -132,6 +132,20 @@ export class GastosComponent implements OnInit {
     console.log(msj);
   }
 
+  eliminarGasto(gasto: IGasto) {
+    const index = this.arrayGastos.findIndex(
+      (x) =>
+        x.nombre === gasto.nombre &&
+        x.monto === gasto.monto &&
+        x.categoria === gasto.categoria
+    );
+    if (index > -1) {
+      this.arrayGastos.splice(index, 1);
+      this.table.renderRows();
+      this.formularioGastos.reset();
+    }
+  }
+
   // editarGasto(gasto: IGasto) {
   //   debugger;
   //   this.roter.navigate([`/editar-gasto/${gasto.id}`]);
